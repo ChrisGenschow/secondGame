@@ -6,8 +6,3 @@ canvas {
   width: 1120px;
   height: 640px;
 }
-
-.Sprite {
-  constructor() {
-  }
-}
