@@ -165,7 +165,7 @@ function animate() {
             ...boundary,
             position: {
               x: boundary.position.x,
-              y: boundary.position.y + 1,
+              y: boundary.position.y + 0.7,
             },
           },
         })
@@ -177,7 +177,7 @@ function animate() {
     }
     if (moving)
       movables.forEach((movable) => {
-        movable.position.y += 1;
+        movable.position.y += 0.7;
       });
   } else if (keys.a.pressed && lastKeyPressed === "a") {
     for (let loopIndex = 0; loopIndex < boundaries.length; loopIndex++) {
@@ -188,7 +188,7 @@ function animate() {
           gameTwoRectangle2: {
             ...boundary,
             position: {
-              x: boundary.position.x + 1,
+              x: boundary.position.x + 0.7,
               y: boundary.position.y,
             },
           },
@@ -201,7 +201,7 @@ function animate() {
     }
     if (moving)
       movables.forEach((movable) => {
-        movable.position.x += 1;
+        movable.position.x += 0.7;
       });
   } else if (keys.s.pressed && lastKeyPressed === "s") {
     for (let loopIndex = 0; loopIndex < boundaries.length; loopIndex++) {
@@ -213,7 +213,7 @@ function animate() {
             ...boundary,
             position: {
               x: boundary.position.x,
-              y: boundary.position.y - 1,
+              y: boundary.position.y - 0.7,
             },
           },
         })
@@ -225,7 +225,7 @@ function animate() {
     }
     if (moving)
       movables.forEach((movable) => {
-        movable.position.y -= 1;
+        movable.position.y -= 0.7;
       });
   } else if (keys.d.pressed && lastKeyPressed === "d") {
     for (let loopIndex = 0; loopIndex < boundaries.length; loopIndex++) {
@@ -236,7 +236,7 @@ function animate() {
           gameTwoRectangle2: {
             ...boundary,
             position: {
-              x: boundary.position.x - 1,
+              x: boundary.position.x - 0.7,
               y: boundary.position.y,
             },
           },
@@ -249,7 +249,7 @@ function animate() {
     }
     if (moving)
       movables.forEach((movable) => {
-        movable.position.x -= 1;
+        movable.position.x -= 0.7;
       });
   }
 }
