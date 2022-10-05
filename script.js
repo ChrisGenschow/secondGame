@@ -72,7 +72,7 @@ const foreground = new Sprite({
     x: offset.x,
     y: offset.y,
   },
-  backgroundImage: backgroundImage,
+  backgroundImage: foregroundImage,
 });
 
 /*playerImage.onload = () => {
@@ -123,7 +123,7 @@ function animate() {
     boundary.draw();
   });
   player.draw();
-  //foreground.draw();
+  foreground.draw();
 
   let moving = true;
   if (keys.w.pressed && lastKeyPressed === "w") {
