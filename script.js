@@ -154,6 +154,21 @@ function animate() {
   player.draw();
   foreground.draw();
 
+  if (keys.w.pressed||keys.a.pressed||keys.s.pressed||keys.d.pressed) {
+    for (let loopIndex = 0; loopIndex < battleZones.length; loopIndex++) {
+        const battleZone = battleZones[loopIndex];
+        if (
+          rectangularCollisions({
+            gameTwoRectangle1: player,
+            gameTwoRectangle2: battleZone
+          })
+        ) {
+          console.log("battleZone colliding");
+          break;
+        }
+    }
+  }
+
   let moving = true;
   if (keys.w.pressed && lastKeyPressed === "w") {
     for (let loopIndex = 0; loopIndex < boundaries.length; loopIndex++) {
@@ -175,6 +190,8 @@ function animate() {
         break;
       }
     }
+
+    
     if (moving)
       movables.forEach((movable) => {
         movable.position.y += 0.7;
@@ -292,3 +309,5 @@ window.addEventListener("keyup", (e) => {
       break;
   }
 });
+
+
