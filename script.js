@@ -1,14 +1,24 @@
 const canvas = document.querySelector("canvas");
 
 const context = canvas.getContext("2d");
+console.log(battleZonesData);
 
 const collisionsMap = [];
 for (let loopIndex = 0; loopIndex < collisions.length; loopIndex += 70) {
   collisionsMap.push(collisions.slice(loopIndex, 70 + loopIndex));
 }
 
+const battleZonesMap = [];
+for (let loopIndex = 0; loopIndex < battleZonesData.length; loopIndex += 70) {
+  battleZonesMap.push(battleZonesData.slice(loopIndex, 70 + loopIndex));
+}
+console.log(battleZonesMap);
+
 console.log(collisionsMap);
-//Generate different images for player and map.
+
+const battleZones = [];
+//Generate different images for player, foreground and map.
+
 const backgroundImage = new Image();
 backgroundImage.src = "./gameTwoAssets/tilemapforbrowsergame.png";
 
@@ -59,6 +69,22 @@ collisionsMap.forEach((row, loopIndex) => {
   });
 });
 
+battleZonesMap.forEach((row, loopIndex) => {
+  row.forEach((symbol, symbolIndex) => {
+    if (symbol === 514)
+      battleZones.push(
+        new Boundary({
+          position: {
+            x: symbolIndex * Boundary.width + offset.x,
+            y: loopIndex * Boundary.height + offset.y,
+          },
+        })
+      );
+  });
+});
+
+console.log(battleZones);
+
 const background = new Sprite({
   position: {
     x: offset.x,
@@ -101,7 +127,7 @@ const keys = {
   },
 };
 
-const movables = [background, ...boundaries, foreground];
+const movables = [background, ...boundaries, foreground, ...battleZones];
 
 function rectangularCollisions({ gameTwoRectangle1, gameTwoRectangle2 }) {
   return (
@@ -121,6 +147,9 @@ function animate() {
   background.draw();
   boundaries.forEach((boundary) => {
     boundary.draw();
+  });
+  battleZones.forEach((battleZone) => {
+    battleZone.draw();
   });
   player.draw();
   foreground.draw();
