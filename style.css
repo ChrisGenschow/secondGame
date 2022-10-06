@@ -1,8 +1,28 @@
 body {
   background-color: black;
+  margin: 0;
 }
 
 canvas {
   width: 1120px;
   height: 640px;
+}
+
+.battleInitiatedAnimationBox {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.relative {
+  position: relative;
 }

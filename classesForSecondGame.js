@@ -14,7 +14,7 @@ class Boundary {
 }
 //Create a sprite class
 class Sprite {
-  constructor({ position, velocity, backgroundImage, frames = { max: 1 } }) {
+  constructor({ position, backgroundImage, frames = { max: 1 } }) {
     this.position = position;
     this.backgroundImage = backgroundImage;
     this.frames = frames;

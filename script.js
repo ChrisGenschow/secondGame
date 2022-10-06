@@ -1,7 +1,7 @@
 const canvas = document.querySelector("canvas");
 
 const context = canvas.getContext("2d");
-console.log(battleZonesData);
+console.log(gsap);
 
 const collisionsMap = [];
 for (let loopIndex = 0; loopIndex < collisions.length; loopIndex += 70) {
@@ -126,9 +126,10 @@ const keys = {
     pressed: false,
   },
 };
-
+//Define which objects to move when pressing "WASD", obviously we're not gonna move the actual player, we're moving the background, and some other objects.
 const movables = [background, ...boundaries, foreground, ...battleZones];
 
+//Add rectangles, so we can use them for collision.
 function rectangularCollisions({ gameTwoRectangle1, gameTwoRectangle2 }) {
   return (
     gameTwoRectangle1.position.x + gameTwoRectangle1.width >=
@@ -142,34 +143,87 @@ function rectangularCollisions({ gameTwoRectangle1, gameTwoRectangle2 }) {
   );
 }
 
+const battle = {
+  initiated: false,
+};
+
+//This function basically animates the whole game world when we move. It also draws the different objects and layers.
 function animate() {
-  window.requestAnimationFrame(animate);
+  const mapAnimationId = window.requestAnimationFrame(animate);
+  console.log(mapAnimationId);
+  //Draw the background/gamemap.
   background.draw();
+  //Draw the collisionboxes. This is muy importante.
   boundaries.forEach((boundary) => {
     boundary.draw();
   });
+  //Draw out the battleZone layer, so we can use it for pokemon-esque fights.
   battleZones.forEach((battleZone) => {
     battleZone.draw();
   });
+  //Draw out the player.
   player.draw();
+  //Draw the foreground. It is very important that this is done AFTER player.draw(), since we want the play to be able to go behind this layer.
   foreground.draw();
 
-  if (keys.w.pressed||keys.a.pressed||keys.s.pressed||keys.d.pressed) {
+  let moving = true;
+
+  console.log(mapAnimationId);
+  if (battle.initiated) return;
+  //Finetune the intersecteion between player and battleZone, so that it'll only trigger when a larger portion of the player is on a battleZone tile. Also, we'll trigger pokemon-esque battles like this.
+  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
     for (let loopIndex = 0; loopIndex < battleZones.length; loopIndex++) {
-        const battleZone = battleZones[loopIndex];
-        if (
-          rectangularCollisions({
-            gameTwoRectangle1: player,
-            gameTwoRectangle2: battleZone
-          })
-        ) {
-          console.log("battleZone colliding");
-          break;
-        }
+      const battleZone = battleZones[loopIndex];
+      const overlappingArea =
+        (Math.min(
+          player.position.x + player.width,
+          battleZone.position.x + battleZone.width
+        ) -
+          Math.max(player.position.x, battleZone.position.x)) *
+        (Math.min(
+          player.position.y + player.height,
+          battleZone.position.y + battleZone.height
+        ) -
+          Math.max(player.position.y, battleZone.position.y));
+      if (
+        rectangularCollisions({
+          gameTwoRectangle1: player,
+          gameTwoRectangle2: battleZone,
+        }) &&
+        overlappingArea > (player.width * player.height) / 2 &&
+        Math.random() < 0.01
+      ) {
+        console.log("ACTIVATE B-B-B-BATTLE!");
+
+        //Deactivate current animation loop.
+        window.cancelAnimationFrame(mapAnimationId);
+        battle.initiated = true;
+        gsap.to(".battleInitiatedAnimationBox", {
+          opacity: 1,
+          repeat: 3,
+          yoyo: true,
+          duration: 0.4,
+          onComplete() {
+            gsap.to(".battleInitiatedAnimationBox", {
+              opacity: 1,
+              duration: 0.4,
+              onComplete() {
+                //Activate a new animation loop
+                animateBattle();
+                gsap.to(".battleInitiatedAnimationBox", {
+                  opacity: 0,
+                  duration: 0.4,
+                });
+              },
+            });
+          },
+        });
+        break;
+      }
     }
   }
 
-  let moving = true;
+  //Assign movement to the WASD keys. Instead of moving the player, we're moving everything in the movables array, kind of like that one Futurama episode.
   if (keys.w.pressed && lastKeyPressed === "w") {
     for (let loopIndex = 0; loopIndex < boundaries.length; loopIndex++) {
       const boundary = boundaries[loopIndex];
@@ -191,7 +245,6 @@ function animate() {
       }
     }
 
-    
     if (moving)
       movables.forEach((movable) => {
         movable.position.y += 0.7;
@@ -272,6 +325,21 @@ function animate() {
 }
 animate();
 
+const battleBackgroundImage = new Image();
+battleBackgroundImage.src = "./gameTwoAssets/Pokemonbattlebackground.png";
+const battleBackground = new Sprite({
+  position: {
+    x: 0,
+    y: 0,
+  },
+  backgroundImage: battleBackgroundImage,
+});
+
+function animateBattle() {
+  window.requestAnimationFrame(animateBattle);
+  battleBackground.draw();
+  console.log("Animating battle");
+}
 let lastKeyPressed = "";
 window.addEventListener("keydown", (e) => {
   switch (e.key) {
@@ -309,5 +377,3 @@ window.addEventListener("keyup", (e) => {
       break;
   }
 });
-
-
