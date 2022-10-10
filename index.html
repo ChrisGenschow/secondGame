@@ -4,13 +4,45 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Christopher Genschow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="inline relative">
       <div class="battleInitiatedAnimationBox"></div>
+
       <canvas></canvas>
+      <div class="userInterface">
+        <div class="enemyInfoBar">
+          <h2>Blob</h2>
+          <h3>Resistance</h3>
+          <div class="HealthInfo">
+            <div class="enemyHealthBar"></div>
+            <div class="enemyHpAmountLeft"></div>
+          </div>
+        </div>
+        <div class="playerInfoBar">
+          <h2>Player</h2>
+          <h3>Health</h3>
+          <div class="HealthInfo">
+            <div class="HealthBar"></div>
+            <div class="HpAmountLeft"></div>
+          </div>
+        </div>
+        <div class="battleMenu">
+          <div class="movesMenu"></div>
+          <div class="attackTypeBox">
+            <h2 class="attackType">Attack Type</h2>
+          </div>
+        </div>
+        <div class="battleDialogueBox">Battle dialogue</div>
+      </div>
     </div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
@@ -18,10 +50,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="classesForSecondGame.js"></script>
     <script src="gameTwoData/battleZones.js"></script>
     <script src="gameTwoData/collisions.js"></script>
-
+    <script src="gameTwoData/attacks.js"></script>
+    <script src="gameTwoData/monsters.js"></script>
+    <script src="classesForSecondGame.js"></script>
     <script src="script.js"></script>
+    <script src="battleScene.js"></script>
   </body>
 </html>

@@ -209,6 +209,7 @@ function animate() {
               duration: 0.4,
               onComplete() {
                 //Activate a new animation loop
+                initializeBattle();
                 animateBattle();
                 gsap.to(".battleInitiatedAnimationBox", {
                   opacity: 0,
@@ -323,23 +324,8 @@ function animate() {
       });
   }
 }
-animate();
+//animate();
 
-const battleBackgroundImage = new Image();
-battleBackgroundImage.src = "./gameTwoAssets/Pokemonbattlebackground.png";
-const battleBackground = new Sprite({
-  position: {
-    x: 0,
-    y: 0,
-  },
-  backgroundImage: battleBackgroundImage,
-});
-
-function animateBattle() {
-  window.requestAnimationFrame(animateBattle);
-  battleBackground.draw();
-  console.log("Animating battle");
-}
 let lastKeyPressed = "";
 window.addEventListener("keydown", (e) => {
   switch (e.key) {

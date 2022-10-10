@@ -1,4 +1,5 @@
 body {
+  font-family: "Silkscreen", cursive;
   background-color: black;
   margin: 0;
 }
@@ -17,6 +18,7 @@ canvas {
   background-color: black;
   opacity: 0;
   pointer-events: none;
+  z-index: 10;
 }
 
 .inline {
@@ -25,4 +27,109 @@ canvas {
 
 .relative {
   position: relative;
+}
+
+.battleMenu {
+  position: absolute;
+  border: 4px dashed white;
+  background-color: black;
+  height: 38%;
+  width: 40%;
+  bottom: 0;
+  right: 0;
+}
+
+.movesMenu {
+  border-bottom: 4px dashed white;
+  height: 60%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.basicAttackButton {
+  font-family: "Silkscreen", cursive;
+  color: white;
+  background-color: black;
+  font-size: larger;
+}
+.attackTypeBox {
+  height: 40%;
+  display: grid;
+  justify-items: center;
+  width: 100%;
+}
+.attackType {
+  color: white;
+}
+.basicAttackButton:hover {
+  font-family: "Silkscreen", cursive;
+  background-color: white;
+  color: black;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.enemyInfoBar {
+  position: absolute;
+  top: 40px;
+  left: 240px;
+  background-color: white;
+  border: 4px dashed black;
+  padding: 4px;
+  width: 400px;
+}
+
+.HealthInfo {
+  position: relative;
+}
+.HealthBar {
+  height: 2em;
+  width: 24em;
+  background-color: rgb(12, 12, 12);
+}
+
+.HpAmountLeft {
+  position: absolute;
+  top: 0;
+  height: 2em;
+  width: 24em;
+  background-color: rgb(0, 255, 0);
+}
+
+.enemyHealthBar {
+  height: 2em;
+  width: 24em;
+  background-color: rgb(12, 12, 12);
+}
+
+.enemyHpAmountLeft {
+  position: absolute;
+  top: 0;
+  height: 2em;
+  width: 24em;
+  background-color: rgb(0, 255, 0);
+}
+
+.playerInfoBar {
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  border: 4px dashed black;
+  padding: 4px;
+  width: 400px;
+  background-color: white;
+}
+
+.battleDialogueBox {
+  background-color: black;
+  border: dashed white 4px;
+  color: white;
+  position: absolute;
+  height: 38%;
+  width: 40%;
+  bottom: 0;
+  right: 0;
+  font-size: larger;
+  cursor: pointer;
+  display: none;
 }
