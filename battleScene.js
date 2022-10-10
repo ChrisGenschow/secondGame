@@ -28,6 +28,7 @@ function animateBattle() {
 }
 
 function initializeBattle() {
+  document.querySelector(".userInterface").style.display = "block";
   blob = new Monster(monsters.Blob);
   hearty = new Monster(monsters.Hearty);
   renderedSprites = [blob, hearty];
