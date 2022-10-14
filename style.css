@@ -8,6 +8,7 @@ canvas {
   width: 1120px;
   height: 640px;
   border: solid white 4px;
+  border-bottom: none;
 }
 
 .battleInitiatedAnimationBox {
@@ -141,9 +142,26 @@ canvas {
 
 .gameManual {
   background-color: black;
-  display: flex;
+  display: grid;
   height: 20em;
   width: 70em;
   border: solid white 4px;
-  display: flex;
+  grid-template-columns: 1fr 1fr;
+}
+
+.gameManual__overworld {
+  display: grid;
+  grid-template-rows: 1fr 2fr 2fr;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: dashed black 4px;
+}
+.gameManual__battle {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: dashed black 4px;
 }
