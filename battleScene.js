@@ -29,6 +29,9 @@ function animateBattle() {
 
 function initializeBattle() {
   document.querySelector(".userInterface").style.display = "block";
+  document.querySelector(".battleDialogueBox").style.display = "none";
+  document.querySelector(".enemyHpAmountLeft").style.width = "100%";
+  document.querySelector(".movesMenu").replaceChildren();
   blob = new Monster(monsters.Blob);
   hearty = new Monster(monsters.Hearty);
   renderedSprites = [blob, hearty];

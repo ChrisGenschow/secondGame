@@ -23,12 +23,13 @@ class Sprite {
     rotation = 0,
   }) {
     this.position = position;
-    this.backgroundImage = backgroundImage;
+    this.backgroundImage = new Image();
     this.frames = frames;
     this.backgroundImage.onload = () => {
       this.width = this.backgroundImage.width / this.frames.max;
       this.height = this.backgroundImage.height;
     };
+    this.backgroundImage.src = backgroundImage.src;
     this.opacity = 1;
 
     this.rotation = rotation;

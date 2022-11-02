@@ -1,14 +1,12 @@
-const heartyImage = new Image();
-heartyImage.src = "./gameTwoAssets/hearty.png";
-const blobImage = new Image();
-blobImage.src = "./gameTwoAssets/blobEnemy.png";
 const monsters = {
   Hearty: {
     position: {
       x: 60,
       y: 67,
     },
-    backgroundImage: heartyImage,
+    backgroundImage: {
+      src: "./gameTwoAssets/hearty.png",
+    },
     frames: {
       max: 1,
     },
@@ -20,7 +18,9 @@ const monsters = {
       x: 200,
       y: 15,
     },
-    backgroundImage: blobImage,
+    backgroundImage: {
+      src: "./gameTwoAssets/blobEnemy.png",
+    },
     frames: {
       max: 4,
     },
